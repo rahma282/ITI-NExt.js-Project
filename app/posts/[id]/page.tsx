@@ -17,7 +17,6 @@ export default function EditPost() {
       const res = await fetch(`/api/posts/${id}`)
       const data = await res.json()
 
-      // Check if the post is found
       if (data && data.authorId) {
         const token = localStorage.getItem('token')
 

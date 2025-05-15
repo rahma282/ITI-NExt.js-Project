@@ -44,7 +44,7 @@ export default function Home() {
       });
       fetchPosts();
     } else {
-      toast.error("Failed to delete post. You can delete only your own post.", {
+      toast.error("You are not authorized to delete this post.", {
         position: "top-center",
       });
     }
