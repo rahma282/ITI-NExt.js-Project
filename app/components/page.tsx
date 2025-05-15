@@ -20,41 +20,43 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-[0_4px_10px_rgba(0,0,0,0.15)] dark:shadow-[0_4px_10px_rgba(255,255,255,0.05)] z-50 relative">
-      <div className="container mx-auto flex justify-between items-center px-4 py-4">
-        <Link
-          href="/"
-          className={`text-3xl font-bold ${dancingScript.className} text-gray-900 dark:text-white`}
-        >
-          Blog
-        </Link>
+    <>
+      <nav className="bg-gradient-to-r from-indigo-600 to-blue-600 dark:from-indigo-900 dark:to-blue-800 text-white shadow-lg z-50 relative">
+        <div className="container mx-auto flex justify-between items-center px-6 py-4">
+          <Link
+            href="/"
+            className={`text-3xl font-bold ${dancingScript.className} text-orange-300`}
+          >
+            PostHub 
+          </Link>
 
-        <div className="flex space-x-6">
-          {isLoggedIn ? (
-            <>
+          <div className="flex space-x-8">
+            {isLoggedIn ? (
+              <>
+                <Link
+                  href="/profile"
+                  className="font-medium hover:text-indigo-200 transition"
+                >
+                  Profile
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="font-medium hover:text-red-200 transition"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
               <Link
-                href="/profile"
-                className="text-gray-800 dark:text-gray-200 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition"
+                href="/login"
+                className="font-medium hover:text-indigo-200 transition"
               >
-                Profile
+                Login
               </Link>
-              <button
-                onClick={handleLogout}
-                className="text-red-600 dark:text-red-400 font-medium hover:text-red-800 dark:hover:text-red-300 transition"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <Link
-              href="/login"
-              className="text-gray-800 dark:text-gray-200 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition"
-            >
-              Login
-            </Link>
-          )}
+            )}
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   )
 }

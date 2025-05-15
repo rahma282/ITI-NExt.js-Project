@@ -1,4 +1,5 @@
 import prisma from '@/lib/prisma'
+import { verifyToken } from '@/lib/auth'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
@@ -16,20 +17,20 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+  const { title, content } = await req.json()
+
+  const decoded = verifyToken(req)
+  if (!decoded) return new Response("Unauthorized", { status: 401 })
+
+  const authorId = decoded.userId
+
   try {
-    const { title, content, authorId } = await req.json();
-
-    if (!title || !content || !authorId) {
-      return NextResponse.json({ error: "Missing fields" }, { status: 400 });
-    }
-
     const newPost = await prisma.post.create({
       data: { title, content, authorId },
-    });
-
-    return NextResponse.json(newPost, { status: 201 });
+    })
+    return new Response(JSON.stringify(newPost), { status: 201 })
   } catch (error) {
-    console.error("Error creating post:", error);
-    return NextResponse.json({ error: "Error creating post" }, { status: 500 });
+    console.error(error)
+    return new Response("Server error", { status: 500 })
   }
 }

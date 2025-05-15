@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 export default function EditPost() {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
-  const [isAuthor, setIsAuthor] = useState(false) 
+  const [isAuthor, setIsAuthor] = useState(false)
   const router = useRouter()
   const { id } = useParams()
 
@@ -20,7 +20,7 @@ export default function EditPost() {
       // Check if the post is found
       if (data && data.authorId) {
         const token = localStorage.getItem('token')
-        
+
         if (token) {
           const decoded: any = JSON.parse(atob(token.split('.')[1]))
           const userId = decoded.userId
@@ -30,7 +30,7 @@ export default function EditPost() {
           } else {
             setIsAuthor(false)
             toast.error('You are not authorized to edit this post.', {
-              position: "top-center",
+              position: 'top-center',
             })
             setTimeout(() => {
               router.push('/')
@@ -51,27 +51,31 @@ export default function EditPost() {
 
     if (!isAuthor) {
       toast.error('You are not authorized to update this post.', {
-        position: "top-center",
+        position: 'top-center',
       })
       return
     }
 
+    const token = localStorage.getItem('token')
     const res = await fetch(`/api/posts/${id}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, 
+      },
       body: JSON.stringify({ title, content }),
     })
 
     if (res.ok) {
       toast.success('Post updated successfully!', {
-        position: "top-center",
+        position: 'top-center',
       })
       setTimeout(() => {
         router.push('/')
       }, 1000)
     } else {
       toast.error('Failed to update the post. Please try again later.', {
-        position: "top-center",
+        position: 'top-center',
       })
     }
   }
@@ -79,8 +83,8 @@ export default function EditPost() {
   return (
     <>
       <ToastContainer />
-      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-xl w-full space-y-6 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+      <div className="min-h-screen bg-gradient-to-r from-indigo-50 to-gray-100 dark:from-indigo-900 dark:to-gray-900 py-10 px-6 flex flex-col items-center">
+        <div className="w-full max-w-lg space-y-8 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl">
           <h1 className="text-3xl font-bold text-center text-gray-800 dark:text-white">
             Edit Post
           </h1>
@@ -113,7 +117,7 @@ export default function EditPost() {
 
             <button
               type="submit"
-              className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300"
+              className="w-full bg-gradient-to-r from-orange-400 to-blue-600 text-white font-semibold py-2 px-4 rounded-lg transform hover:scale-105 transition duration-300"
               disabled={!isAuthor}
             >
               Update Post

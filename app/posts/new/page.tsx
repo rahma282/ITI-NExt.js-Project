@@ -40,6 +40,7 @@ export default function CreatePost() {
     }
 
     try {
+      const token = localStorage.getItem('token')
       const res = await fetch('/api/posts', {
         method: 'POST',
         body: JSON.stringify({
@@ -49,6 +50,7 @@ export default function CreatePost() {
         }),
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
       })
 
@@ -73,8 +75,8 @@ export default function CreatePost() {
   return (
     <>
       <ToastContainer />
-      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-xl w-full space-y-6 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+      <div className="min-h-screen bg-gradient-to-r from-indigo-50 to-gray-100 dark:from-indigo-900 dark:to-gray-900 py-10 px-6 flex flex-col items-center">
+        <div className="w-full max-w-lg space-y-8 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl">
           <h1 className="text-3xl font-bold text-center text-gray-800 dark:text-white">
             Create a New Post
           </h1>
@@ -109,7 +111,7 @@ export default function CreatePost() {
 
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300"
+              className="w-full bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-semibold py-2 px-4 rounded-lg transform hover:scale-105 transition duration-300"
             >
               Create Post
             </button>

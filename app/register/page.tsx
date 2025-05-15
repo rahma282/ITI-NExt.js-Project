@@ -27,7 +27,6 @@ export default function RegisterPage() {
       })
       setTimeout(() => router.push('/login'), 1000)
     } else {
-      // On error
       const data = await res.json()
       toast.error(data.error || 'Registration failed', {
         position: "top-center",
@@ -39,12 +38,12 @@ export default function RegisterPage() {
     <>
       <ToastContainer />
 
-      <section className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 px-4">
+      <section className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-50 to-gray-100 dark:from-indigo-900 dark:to-gray-900 py-10 px-6">
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-md bg-white dark:bg-gray-800 shadow-xl rounded-xl p-8"
+          className="w-full max-w-lg space-y-6 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl"
         >
-          <h1 className="text-3xl font-extrabold text-center mb-6 text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-center text-gray-800 dark:text-white">
             Create a New Account
           </h1>
 
@@ -57,7 +56,7 @@ export default function RegisterPage() {
               value={name}
               onChange={e => setName(e.target.value)}
               placeholder="Your full name"
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
@@ -71,7 +70,7 @@ export default function RegisterPage() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="example@email.com"
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
@@ -84,14 +83,14 @@ export default function RegisterPage() {
               type="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
+            className="w-full bg-gradient-to-r from-indigo-600 to-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
           >
             Register
           </button>
